@@ -1,0 +1,168 @@
+#N canvas 201 143 923 711 10;
+#N canvas 544 65 882 584 output-and-reverb 0;
+#X obj 88 383 dac~;
+#X obj 87 324 *~;
+#X obj 343 451 dbtorms;
+#X obj 343 480 pack f 40;
+#X obj 343 509 line~;
+#X obj 147 324 *~;
+#X obj 86 251 *~;
+#X obj 189 84 dbtorms;
+#X obj 189 113 pack f 40;
+#X obj 189 142 line~;
+#X obj 189 57 r dry-volume;
+#X obj 315 102 r wet-volume;
+#X obj 358 152 r rvb;
+#X obj 86 66 inlet~;
+#X floatatom 463 299 5 0 100 1 dry - dry-volume, f 5;
+#X floatatom 533 299 5 0 100 1 wet - wet-volume, f 5;
+#X floatatom 603 299 5 0 99 1 rvb - rvb, f 5;
+#X msg 743 264 85;
+#X msg 463 262 90;
+#X msg 603 264 90;
+#X obj 463 228 loadbang;
+#X obj 466 329 hsl 200 15 40 100 0 0 empty empty master-volume 8 8
+0 12 -262144 -1 -1 16583 1;
+#X obj 86 88 hip~ 5;
+#X msg 393 262 90;
+#X obj 31 147 env~;
+#X floatatom 31 169 5 0 0 0 - - -, f 5;
+#X obj 225 266 rev3~ 0 85 3000 60;
+#X obj 343 369 moses 41;
+#X obj 343 390 t b;
+#X msg 343 411 0;
+#X connect 1 0 0 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 4 0 1 1;
+#X connect 4 0 5 1;
+#X connect 5 0 0 1;
+#X connect 6 0 1 0;
+#X connect 6 0 5 0;
+#X connect 7 0 8 0;
+#X connect 8 0 9 0;
+#X connect 9 0 6 1;
+#X connect 10 0 7 0;
+#X connect 11 0 26 2;
+#X connect 12 0 26 3;
+#X connect 13 0 22 0;
+#X connect 17 0 16 0;
+#X connect 18 0 14 0;
+#X connect 19 0 15 0;
+#X connect 20 0 18 0;
+#X connect 20 0 19 0;
+#X connect 20 0 17 0;
+#X connect 20 0 23 0;
+#X connect 21 0 27 0;
+#X connect 22 0 6 0;
+#X connect 22 0 24 0;
+#X connect 22 0 26 0;
+#X connect 23 0 21 0;
+#X connect 24 0 25 0;
+#X connect 26 0 1 0;
+#X connect 26 1 5 0;
+#X connect 27 0 28 0;
+#X connect 27 1 2 0;
+#X connect 28 0 29 0;
+#X connect 29 0 2 0;
+#X coords 0 -1 1 1 225 60 2 455 290;
+#X restore 43 605 pd output-and-reverb;
+#X obj 43 319 mtof~;
+#X obj 43 364 phasor~;
+#X obj 304 353 line~;
+#X floatatom 304 312 5 0 10000 1 squeeze - -, f 5;
+#X obj 304 331 pack f 40;
+#X obj 218 216 +~ 1;
+#X obj 218 238 /~ 2;
+#X obj 218 194 cos~;
+#X obj 19 483 cnv 15 260 85 empty empty empty 20 12 0 14 -249597 -66577
+0;
+#X obj 218 348 *~ 100;
+#X msg 43 91 0.2;
+#X msg 83 91 0.4;
+#X msg 469 250 set crude;
+#X msg 509 330 set scifiNoise;
+#X obj 469 392 t b a b;
+#X msg 557 424 \; pd dsp 0 \;;
+#X msg 469 424 \; pd dsp 1 \;;
+#X msg 519 350 set scrap;
+#X msg 499 310 set modern;
+#X msg 479 270 set groan;
+#X msg 489 290 set guit1;
+#X text 368 481 NOTE: turn DSP off before loading a new wavetable set
+to avoid a glut of error messages due to send~/receive~ buses that
+go missing during the dynamic patching process. Turn DSP back on after
+the set is loaded. You can skip this if you don't want audio dropouts
+\, but you'll get errors in the post window and may experience dropouts
+anyway due to the file loading/dynamic patching process.;
+#X text 368 581 You will always receive one soundfiler_read error message
+that occurs due to the method used for loading an arbitrary number
+of soundfiles.;
+#X text 366 161 Inlet 0: phasor input (0-1) \; Inlet 1: index into
+the wavetable set (percent) \; Inlet 2: squeeze factor to compress
+duty cycle and flatten out spectrum \; Inlet 3: send a "set" message
+to load a different wavetable set \;;
+#X text 179 502 [missive~] \; William Brent \; Aaron Groves \; version
+0.3 \; 2017;
+#X text 365 30 [missive~] is a vector synth object that uses a wavetable
+index to crossfade between neighboring wavetables in a set. Wavetable
+sets can have an arbitrary number of wavetables \, and are composed
+of individual .wav files that each contain one wavetable cycle. The
+length of each wavetable can be arbitrary because [missive~] adds the
+extra guard points required for Pd's 4-point interpolation scheme.
+The creation argument to [missive~] is the name of a wavetable set
+\, which must be in [missive~]'s wavetables directory.;
+#N canvas 108 83 455 340 sample-and-hold-sequencer 0;
+#X obj 43 217 samphold~;
+#X obj 43 267 +~ 24;
+#X obj 43 53 metro 3000;
+#X obj 43 162 phasor~;
+#X obj 43 31 loadbang;
+#X obj 188 167 wrap~ 1;
+#X obj 188 145 *~ 50;
+#X obj 43 75 random 100000;
+#X obj 43 97 / 10000;
+#X obj 43 242 *~ 36;
+#X obj 43 288 outlet~;
+#X obj 274 147 outlet~;
+#X obj 188 75 phasor~ 0.2;
+#X obj 188 45 inlet;
+#X connect 0 0 9 0;
+#X connect 1 0 10 0;
+#X connect 2 0 7 0;
+#X connect 3 0 0 0;
+#X connect 4 0 2 0;
+#X connect 5 0 0 1;
+#X connect 6 0 5 0;
+#X connect 7 0 8 0;
+#X connect 8 0 3 0;
+#X connect 9 0 1 0;
+#X connect 12 0 6 0;
+#X connect 12 0 11 0;
+#X connect 13 0 12 0;
+#X restore 43 139 pd sample-and-hold-sequencer;
+#X text 40 65 Sequencer speed;
+#X obj 43 504 missive~ groan;
+#X connect 1 0 2 0;
+#X connect 2 0 29 0;
+#X connect 3 0 29 2;
+#X connect 4 0 5 0;
+#X connect 5 0 3 0;
+#X connect 6 0 7 0;
+#X connect 7 0 10 0;
+#X connect 8 0 6 0;
+#X connect 10 0 29 1;
+#X connect 11 0 27 0;
+#X connect 12 0 27 0;
+#X connect 13 0 15 0;
+#X connect 14 0 15 0;
+#X connect 15 0 17 0;
+#X connect 15 1 29 3;
+#X connect 15 2 16 0;
+#X connect 18 0 15 0;
+#X connect 19 0 15 0;
+#X connect 20 0 15 0;
+#X connect 21 0 15 0;
+#X connect 27 0 1 0;
+#X connect 27 1 8 0;
+#X connect 29 0 0 0;

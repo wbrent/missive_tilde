@@ -1,0 +1,29 @@
+#N canvas 647 350 569 398 10;
+#X obj 40 249 *~ 0.5;
+#X obj 40 279 -~ 0.25;
+#X obj 40 309 cos~;
+#X obj 40 214 /~ 100;
+#X obj 40 37 inlet~;
+#X obj 40 176 -~;
+#X obj 129 64 f \$4;
+#X obj 129 86 * 50;
+#X obj 40 137 clip~;
+#X obj 129 108 + 100;
+#X obj 40 338 s~ missive-\$1-\$2-\$4-gain;
+#X text 176 182 \$1: missive dollar zero \; \$2: wavetable set name
+\; \$3: number of wavetables in this set \; \$4: wavetablePeriodID
+\;;
+#X obj 129 42 r missive-\$1-init-gainsetters;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 10 0;
+#X connect 3 0 0 0;
+#X connect 4 0 8 0;
+#X connect 5 0 3 0;
+#X connect 6 0 7 0;
+#X connect 7 0 5 1;
+#X connect 7 0 8 1;
+#X connect 7 0 9 0;
+#X connect 8 0 5 0;
+#X connect 9 0 8 2;
+#X connect 12 0 6 0;

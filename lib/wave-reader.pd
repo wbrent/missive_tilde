@@ -1,0 +1,27 @@
+#N canvas 130 427 639 481 10;
+#X floatatom 218 224 10 0 0 0 - - -, f 10;
+#X obj 18 184 *~;
+#X obj 18 243 +~ 1;
+#X obj 18 359 *~;
+#X obj 18 275 tabread4~ missive-\$3-\$1-\$2-wave-guarded;
+#X obj 88 196 +~;
+#X obj 88 167 *~;
+#X obj 62 323 r~ missive-\$3-\$1-\$2-gain;
+#X obj 18 427 throw~ missive-\$3-sum-bus;
+#X obj 135 147 r missive-\$3-\$1-\$2-numSamps;
+#X obj 88 55 r~ missive-\$3-squeeze;
+#X obj 18 13 r~ missive-\$3-phasor;
+#X text 414 104 \$1: Wavetable set \; \$2: wavetablePeriodID \; \$3:
+missive dollar zero \;;
+#X connect 1 0 2 0;
+#X connect 2 0 4 0;
+#X connect 3 0 8 0;
+#X connect 4 0 3 0;
+#X connect 5 0 1 1;
+#X connect 6 0 5 0;
+#X connect 7 0 3 1;
+#X connect 9 0 5 1;
+#X connect 9 0 0 0;
+#X connect 9 0 6 1;
+#X connect 10 0 6 0;
+#X connect 11 0 1 0;
