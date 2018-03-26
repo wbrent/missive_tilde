@@ -104,14 +104,6 @@ duty cycle and flatten out spectrum \; Inlet 3: send a "set" message
 to load a different wavetable set \;;
 #X text 179 502 [missive~] \; William Brent \; Aaron Groves \; version
 0.3 \; 2017;
-#X text 365 30 [missive~] is a vector synth object that uses a wavetable
-index to crossfade between neighboring wavetables in a set. Wavetable
-sets can have an arbitrary number of wavetables \, and are composed
-of individual .wav files that each contain one wavetable cycle. The
-length of each wavetable can be arbitrary because [missive~] adds the
-extra guard points required for Pd's 4-point interpolation scheme.
-The creation argument to [missive~] is the name of a wavetable set
-\, which must be in [missive~]'s wavetables directory.;
 #N canvas 108 83 455 340 sample-and-hold-sequencer 0;
 #X obj 43 217 samphold~;
 #X obj 43 267 +~ 24;
@@ -143,26 +135,35 @@ The creation argument to [missive~] is the name of a wavetable set
 #X restore 43 139 pd sample-and-hold-sequencer;
 #X text 40 65 Sequencer speed;
 #X obj 43 504 missive~ groan;
+#X text 365 30 [missive~] is a vector synth object that uses a wavetable
+index to crossfade between neighboring wavetables in a set. Wavetable
+sets can have an arbitrary number of wavetables \, and are composed
+of individual .wav files (numbered 0.wav \, 1.wav \, etc.) that each
+contain one wavetable cycle. The length of each wavetable can be arbitrary
+because [missive~] adds the extra guard points required for Pd's 4-point
+interpolation scheme. The creation argument to [missive~] is the name
+of a wavetable set \, which must be in [missive~]'s wavetables directory.
+;
 #X connect 1 0 2 0;
-#X connect 2 0 29 0;
-#X connect 3 0 29 2;
+#X connect 2 0 28 0;
+#X connect 3 0 28 2;
 #X connect 4 0 5 0;
 #X connect 5 0 3 0;
 #X connect 6 0 7 0;
 #X connect 7 0 10 0;
 #X connect 8 0 6 0;
-#X connect 10 0 29 1;
-#X connect 11 0 27 0;
-#X connect 12 0 27 0;
+#X connect 10 0 28 1;
+#X connect 11 0 26 0;
+#X connect 12 0 26 0;
 #X connect 13 0 15 0;
 #X connect 14 0 15 0;
 #X connect 15 0 17 0;
-#X connect 15 1 29 3;
+#X connect 15 1 28 3;
 #X connect 15 2 16 0;
 #X connect 18 0 15 0;
 #X connect 19 0 15 0;
 #X connect 20 0 15 0;
 #X connect 21 0 15 0;
-#X connect 27 0 1 0;
-#X connect 27 1 8 0;
-#X connect 29 0 0 0;
+#X connect 26 0 1 0;
+#X connect 26 1 8 0;
+#X connect 28 0 0 0;
