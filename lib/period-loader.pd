@@ -75,7 +75,7 @@
 #X connect 27 0 28 0;
 #X connect 30 0 29 0;
 #X restore 144 479 pd copy-points;
-#X floatatom 80 223 10 0 0 0 - - -, f 10;
+#X floatatom 80 223 10 0 0 0 - - - 0;
 #X obj 33 13 r missive-\$2-wt-set;
 #X obj 273 330 pack f \$2 s \$1;
 #X msg 273 350 \; missive-\$2-\$3-\$4-numSamps \$1 \;;
@@ -85,8 +85,8 @@
 #X obj 33 522 pack \$2 s \$1;
 #X msg 33 557 \; missive-\$1-\$2-\$3-wave-guarded normalize \;;
 #N canvas 1010 212 450 300 \$0-wavetables 0;
-#X obj 50 100 table missive-6165-modern-0-wave;
-#X obj 50 175 table missive-6165-modern-0-wave-guarded;
+#X obj 50 100 table missive-1216-name_of_set-0-wave;
+#X obj 50 175 table missive-1216-name_of_set-0-wave-guarded;
 #X restore 491 74 pd \$0-wavetables;
 #N canvas 1035 531 613 337 gen-wavetables 0;
 #X obj 49 30 inlet;
@@ -102,12 +102,14 @@
 #X connect 2 0 3 0;
 #X connect 5 0 1 0;
 #X connect 5 1 2 0;
-#X restore 220 103 pd gen-wavetables;
-#X text 221 56 \$1: wavetablePeriodID \; \$2: missive dollar zero;
-#X obj 33 35 t s s s s s s;
-#X obj 33 130 pack s \$1 \$2;
-#X msg 33 154 read -resize ../wavetables/\$1/\$2.wav missive-\$3-\$1-\$2-wave
+#X restore 220 83 pd gen-wavetables;
+#X text 424 216 \$1: wavetablePeriodID \; \$2: missive dollar zero
 ;
+#X obj 33 35 t b s s s s s;
+#X obj 33 130 pack s \$1 \$2 s;
+#X msg 33 154 read -resize \$1 missive-\$3-\$4-\$2-wave;
+#X obj 33 93 text get missive-\$2-filenames;
+#X obj 33 66 f \$1;
 #X connect 0 0 3 0;
 #X connect 0 0 7 0;
 #X connect 1 0 8 0;
@@ -119,11 +121,14 @@
 #X connect 7 3 5 0;
 #X connect 8 0 9 0;
 #X connect 10 0 11 0;
-#X connect 15 0 16 0;
+#X connect 15 0 19 0;
 #X connect 15 1 10 1;
+#X connect 15 1 16 3;
 #X connect 15 2 2 1;
 #X connect 15 3 8 2;
 #X connect 15 4 5 2;
 #X connect 15 5 13 0;
 #X connect 16 0 17 0;
 #X connect 17 0 0 0;
+#X connect 18 0 16 0;
+#X connect 19 0 18 0;
